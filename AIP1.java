@@ -24,6 +24,9 @@ import javafx.embed.swing.SwingFXUtils;
  */
 public class AIP1 extends Application{
     
+    static{
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+    }
     public AIP1(){
         
     }
@@ -37,16 +40,13 @@ public class AIP1 extends Application{
     }
 
     public static void main(String[] args) {
-        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-        AIP1 a = new AIP1();
-        a.loadImage();
         launch(args);
     }
     
-    public void loadImage(){
-        URL url_img = getClass().getResource("1.jpg");
+    public Image loadImage(){
+        URL url_img = getClass().getResource("hw1_atrium.hdr");
         String ruta = url_img.getPath();
-        
+        Image imagenMostrar = null;
         Mat imagen;
          if (ruta.startsWith("/")) {
             ruta = ruta.substring(1);
@@ -58,11 +58,11 @@ public class AIP1 extends Application{
             System.out.println("if");
             //Image imagenMostrar = convertir(imagen);
             BufferedImage bufImage =  Mat2BufferedImage(imagen);
-            Image imagenMostrar = SwingFXUtils.toFXImage(bufImage, null);
-            View1.img2CImg1.setImage(new Image(getClass().getResource("/aip1/1.jpg").toExternalForm()));
+            imagenMostrar = SwingFXUtils.toFXImage(bufImage, null);
         }else{
             System.out.println("fuck!");
         }
+        return imagenMostrar;
     }
     
 
